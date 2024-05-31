@@ -10,7 +10,7 @@ Generative Video Models</h1>
 
 
 <a href='https://ailab-cvc.github.io/cvvae/index.html'><img src='https://img.shields.io/badge/Project-Page-green'></a>
-<a href=''><img src='https://img.shields.io/badge/Technique-Report-red'></a>
+<a href='https://arxiv.org/abs/2405.20279'><img src='https://img.shields.io/badge/Technique-Report-red'></a>
 
 
 </div>
@@ -24,12 +24,17 @@ Generative Video Models</h1>
 
 ## 📝 TODO
 
-- []  Release CV-VAE model weights and inference code.
+- [ ]  Release CV-VAE model weights and inference code.
 
-- [] Release SVD UNet model model weight and diffusers pipeline.
+- [ ] Release SVD UNet model model weight and diffusers pipeline.
 
 
-<!-- ## 😉 Citation
+## 😉 Citation
 ```
-
-``` -->
+@article{zhao2024cvvae,
+  title={CV-VAE: A Compatible Video VAE for Latent Generative Video Models},
+  author={Zhao, Sijie and Zhang, Yong and Cun, Xiaodong and Yang, Shaoshu and Niu, Muyao and Li, Xiaoyu and Hu, Wenbo and Shan, Ying},
+  journal={https://arxiv.org/abs/2405.20279},
+  year={2024}
+}
+```
