@@ -22,11 +22,29 @@ Generative Video Models</h1>
 </p>
 
 
-## 📝 TODO
+## News
 
-- [ ]  Release CV-VAE model weights and inference code.
+- [x] **2024-06-03** :hugs: We have released the inference code of CV-VAE and [model weights](https://huggingface.co/AILab-CVC/CV-VAE/tree/main) 
 
-- [ ] Release SVD UNet model model weight and diffusers pipeline.
+## Usage
+
+### Dependencies
+- Python >= 3.8 (Recommend to use [Anaconda](https://www.anaconda.com/download/#linux))
+- [PyTorch >= 1.13.0](https://pytorch.org/)
+- NVIDIA GPU + [CUDA](https://developer.nvidia.com/cuda-downloads)
+
+### Model Weights
+We release the model weights of CV-VAE in [Hugging Face](https://huggingface.co/AILab-CVC/CV-VAE/tree/main)
+
+### Video reconstruction
+```bash
+python3 cvvae_inference_video.py \
+  --vae_path MODEL_PATH \
+  --video_path INPUT_VIDEO_PATH \
+  --save_path VIDEO_SAVE_PATH \
+  --height HEIGHT \
+  --width WIDTH 
+```
 
 
 ## 😉 Citation
