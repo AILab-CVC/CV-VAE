@@ -7,12 +7,6 @@ from torchvision.io import write_video
 from torchvision import transforms
 from fire import Fire
 
-# download from https://huggingface.co/AILab-CVC/CV-VAE/tree/main
-vae_path = '/apdcephfs_cq10/share_1290939/sijiezhao/release/CV_VAE'
-
-video_path = 'data/19329262-hd_1280_720_24fps.mp4'
-save_path = 'output/4065480-hd_1280_720_30fps.mp4'
-
 def main(vae_path, video_path, save_path, height=576, width=1024):
     vae3d = CVVAEModel.from_pretrained(vae_path,subfolder="vae3d",torch_dtype=torch.float16)
     vae3d.requires_grad_(False)
