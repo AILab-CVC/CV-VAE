@@ -35,10 +35,11 @@ Generative Video Models</h1>
 - [PyTorch >= 1.13.0](https://pytorch.org/)
 - NVIDIA GPU + [CUDA](https://developer.nvidia.com/cuda-downloads)
 
-### Model Weights
-We release the model weights of CV-VAE in [Hugging Face](https://huggingface.co/AILab-CVC/CV-VAE/tree/main)
 
 ### Video reconstruction
+
+Download the model weight from [Hugging Face](https://huggingface.co/AILab-CVC/CV-VAE/tree/main)
+
 ```bash
 python3 cvvae_inference_video.py \
   --vae_path MODEL_PATH \
