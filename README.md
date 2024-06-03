@@ -26,7 +26,7 @@ Generative Video Models</h1>
 
 - [x] **2024-06-03** :hugs: We have released the inference code of CV-VAE and [model weights](https://huggingface.co/AILab-CVC/CV-VAE/tree/main) 
 
-- [x] **2024-06-03**  We have updated the [arXiv preprint](https://arxiv.org/abs/2405.20279)
+- [x] **2024-05-30**  We have updated the [arXiv preprint](https://arxiv.org/abs/2405.20279)
 
 ## Usage
 
