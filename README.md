@@ -24,9 +24,10 @@ Generative Video Models</h1>
 
 ## News
 
-- [x] **2024-06-03** :hugs: We have released the inference code of CV-VAE and [model weights](https://huggingface.co/AILab-CVC/CV-VAE/tree/main) 
+- [x] **2024-06-07** :hugs: We updated the text-to-image [inference code]((pipelines/pipeline_stable_diffusion.py)) for SD2.1 + CV-VAE
+- [x] **2024-06-03**  We have released the [inference code](cvvae_inference_video.py) and [model weights](https://huggingface.co/AILab-CVC/CV-VAE/tree/main) of CV-VAE.
 
-- [x] **2024-05-30**  We have updated the [arXiv preprint](https://arxiv.org/abs/2405.20279)
+- [x] **2024-05-30**  We have updated the [arXiv preprint](https://arxiv.org/abs/2405.20279).
 
 ## Usage
 
