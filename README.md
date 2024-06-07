@@ -2,7 +2,7 @@
 <h1>CV-VAE: A Compatible Video VAE for Latent 
 Generative Video Models</h1>
 
-[Sijie Zhao](https://scholar.google.com/citations?user=tZ3dS3MAAAAJ) · [Yong Zhang*](https://yzhang2016.github.io/) · [Xiaodong Cun](https://vinthony.github.io/academic/) · [Shaoshu Yang]()· [Muyao Niu]()
+[Sijie Zhao](https://scholar.google.com/citations?user=tZ3dS3MAAAAJ) · [Yong Zhang*](https://yzhang2016.github.io/) · [Xiaodong Cun](https://vinthony.github.io/academic/) · [Shaoshu Yang]() · [Muyao Niu]()
 
 [Xiaoyu Li](https://xiaoyu258.github.io/) · [Wenbo Hu](https://wbhu.github.io/) · [Ying Shan](https://scholar.google.com/citations?user=4oXBp9UAAAAJ&hl=en)
 
