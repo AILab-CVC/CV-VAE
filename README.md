@@ -2,15 +2,7 @@
 <h1>CV-VAE: A Compatible Video VAE for Latent 
 Generative Video Models</h1>
 
-[Sijie Zhao](https://scholar.google.com/citations?user=tZ3dS3MAAAAJ) · [Yong Zhang*](https://yzhang2016.github.io/) · [Xiaodong Cun](https://vinthony.github.io/academic/) · [Shaoshu Yang]() · [Muyao Niu]()
 
-[Xiaoyu Li](https://xiaoyu258.github.io/) · [Wenbo Hu](https://wbhu.github.io/) · [Ying Shan](https://scholar.google.com/citations?user=4oXBp9UAAAAJ&hl=en)
-
-<sup>*</sup>Corresponding Authors
-
-
-<a href='https://ailab-cvc.github.io/cvvae/index.html'><img src='https://img.shields.io/badge/Project-Page-green'></a>
-<a href='https://arxiv.org/abs/2405.20279'><img src='https://img.shields.io/badge/Technique-Report-red'></a>
 
 
 </div>
@@ -25,9 +17,8 @@ Generative Video Models</h1>
 ## News
 
 - [x] **2024-06-07** :hugs: We updated the text-to-image [inference code](sd21_vae3d_inference.ipynb) for SD2.1 + CV-VAE
-- [x] **2024-06-03**  We have released the [inference code](cvvae_inference_video.py) and [model weights](https://huggingface.co/AILab-CVC/CV-VAE/tree/main) of CV-VAE.
+- [x] **2024-06-03**  We have released the [inference code](cvvae_inference_video.py) and model weights of CV-VAE.
 
-- [x] **2024-05-30**  We have updated the [arXiv preprint](https://arxiv.org/abs/2405.20279).
 
 ## Usage
 
@@ -39,7 +30,6 @@ Generative Video Models</h1>
 
 ### Video reconstruction
 
-Download the model weight from [Hugging Face](https://huggingface.co/AILab-CVC/CV-VAE/tree/main)
 
 ```bash
 python3 cvvae_inference_video.py \
@@ -50,13 +40,3 @@ python3 cvvae_inference_video.py \
   --width WIDTH 
 ```
 
-
-## 😉 Citation
-```
-@article{zhao2024cvvae,
-  title={CV-VAE: A Compatible Video VAE for Latent Generative Video Models},
-  author={Zhao, Sijie and Zhang, Yong and Cun, Xiaodong and Yang, Shaoshu and Niu, Muyao and Li, Xiaoyu and Hu, Wenbo and Shan, Ying},
-  journal={https://arxiv.org/abs/2405.20279},
-  year={2024}
-}
-```
