@@ -24,7 +24,9 @@ Generative Video Models</h1>
 
 ## News
 
-- [x] **2024-06-07** :hugs: We updated the text-to-image [inference code](sd21_vae3d_inference.ipynb) for SD2.1 + CV-VAE
+- [x] **2024-10-14** :hugs: We have updated the training code of CV-VAE.
+- [x] **2024-10-14**  We have released the [inference code](cvvae_sd3_inference_video.py) and [model weights](https://huggingface.co/AILab-CVC/CV-VAE/tree/main) of CV-VAE-SD3.
+- [x] **2024-09-25**  CV-VAE is accepted by NeurIPS 2024.
 - [x] **2024-06-03**  We have released the [inference code](cvvae_inference_video.py) and [model weights](https://huggingface.co/AILab-CVC/CV-VAE/tree/main) of CV-VAE.
 
 - [x] **2024-05-30**  We have updated the [arXiv preprint](https://arxiv.org/abs/2405.20279).
