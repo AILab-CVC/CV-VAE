@@ -1,0 +1,213 @@
+model:
+  base_learning_rate: 2.0e-5
+  target: lvdm.models.autoencoder.AutoencodingEngineWithLatentConstraint
+  params:
+    ckpt_path: CKPT_PATH
+    input_key: frames
+    monitor: train/loss/rec
+    disc_start_iter: 0
+
+    encoder_config:
+      target: lvdm.modules.diffusionmodules.vae_models3d_sd3.Encoder3D
+      params:
+        in_channels: 3
+        out_channels: 16
+        down_block_types: ["DownEncoderBlock3D","DownEncoderBlock3D","DownEncoderBlock3D","DownEncoderBlock3D"]
+        block_out_channels: [128, 256, 512, 512]
+        layers_per_block: 2
+        norm_num_groups: 32
+        act_fn: silu
+        double_z: True
+        mid_block_add_attention: True
+        causal: True
+        half_3d: True
+
+    decoder_config:
+      target: lvdm.modules.diffusionmodules.vae_models3d_sd3.Decoder3D
+      params: 
+        in_channels: 16
+        out_channels: 3
+        up_block_types: ["UpDecoderBlock3D","UpDecoderBlock3D","UpDecoderBlock3D","UpDecoderBlock3D"]
+        block_out_channels: [128, 256, 512, 512]
+        layers_per_block: 2
+        norm_num_groups: 32
+        act_fn: silu
+        # norm_type: group # group, spatial
+        mid_block_add_attention: True
+        causal: False
+        half_3d: True
+    
+    constraint_decoder_config:
+      target: lvdm.modules.diffusionmodules.vae_models_sd3.DecoderWith3DWrapper
+      params:
+        in_channels: 16
+        out_channels: 3
+        up_block_types: ["UpDecoderBlock2D","UpDecoderBlock2D","UpDecoderBlock2D","UpDecoderBlock2D",]
+        block_out_channels: [128, 256, 512, 512]
+        layers_per_block: 2
+        norm_num_groups: 32
+        act_fn: silu
+        # norm_type: group,  # group, spatial
+        mid_block_add_attention: True
+
+
+    regularizer_config:
+      target: lvdm.modules.autoencoding.regularizers.DiagonalGaussianRegularizer
+
+    loss_config:
+      target: lvdm.modules.autoencoding.losses.LPIPSWithDiscriminatorAndDomainConstraint
+      params:
+        perceptual_weight: 0.5
+        # disc_start: 10001
+        # disc_start: 10001
+        disc_start: 1
+        disc_weight: 0.5
+        learn_logvar: True
+        rec_loss: l1
+        dims: 3
+        time_n_compress: 4
+        rec2d_weight: 1.0
+        target_type: random
+
+        regularization_weights:
+          kl_loss: 1.0
+        discriminator_config:
+          target: lvdm.modules.autoencoding.lpips.model.model.NLayerDiscriminator3D
+          params: 
+            input_nc: 3
+            ndf: 64
+            n_layers: 4
+            use_actnorm: False
+            causal: False
+            half_3d: False
+
+    optimizer_config:
+      target: torch.optim.AdamW
+      params:
+        betas: [0.9,0.98]
+        eps: 1.0e-4
+        weight_decay: 0.01
+        # weight_decay: 0.1
+
+    lr_g_factor: 2
+    lr_g_scheduler_config:
+      target: lvdm.lr_scheduler.get_scheduler
+      params:
+        name: cosine
+        num_warmup_steps: 1000
+        num_training_steps: 60000
+        min_lr_ratio: 0.005
+
+
+data:
+  target: lvdm.data.CustomDataModuleFromConfig
+  params:
+    train: 
+      datapipes:
+        datasets:
+
+          image_webdata:
+            urls_or_dir: WEBDATASET_DIR
+            meta_urls_or_dir: null
+            file_mask: '*.tar'
+            repeat: 10
+            shardshuffle: 10
+            sample_shuffle: 100
+            batch_size: 8
+            collation_fn: null
+            handler: 
+              target: webdataset.warn_and_continue
+            decoder: 
+              target: lvdm.data.decoder.webdata_image_decoder
+              params:
+                spatial_transform: 
+                  target: lvdm.data.transform.get_image_transform
+                  params:
+                    resolution: [320,320]
+                    to_tensor: True
+                load_json: False
+                load_txt: False
+                add_time_dim: True
+            filter: 
+              target: lvdm.data.map_func.frame_filter
+            inputs_selector: 
+              target: lvdm.data.map_func.frame_select
+            
+          webvid:
+            urls_or_dir: null
+            meta_urls_or_dir: VIDEO_METADATA_DIR
+            file_mask: '*.csv'
+            repeat: 2
+            shardshuffle: 1
+            sample_shuffle: 100
+            batch_size: 1
+            collation_fn: null
+            handler:
+              target: webdataset.reraise_exception
+            decoder:
+              target: lvdm.data.decoder.webvid_decoder
+              params:
+                data_root: VIDEO_DATA_ROOT
+                video_length: 17
+                load_raw_resolution: True
+                resolution: [256, 256]
+                spatial_transform:
+                  target: lvdm.data.transform.get_webvid_spatial_transform
+                  params:
+                    resolution: [256, 256]
+                    resize_resolution: 512
+                    random_crop: True
+                frame_stride_range: [1, 8]
+                cond_noise_range: [0.00, 0.04]
+                rank_time_dim_to_0: False
+
+            filter: 
+              target: lvdm.data.map_func.frame_filter
+            inputs_selector: 
+              target: lvdm.data.map_func.frame_select
+
+        sample_weights: [0.5, 0.5]
+      dataloader:
+        batch_size: null
+        collation_fn: null
+        num_workers: 4
+
+lightning:
+  trainer: 
+    precision: 32
+    benchmark: False
+    accumulate_grad_batches: 1
+    max_steps: 200000
+    log_every_n_steps: 50
+    check_val_every_n_epoch: 10
+    # gradient_clip_algorithm: 'norm'
+    # strategy: deepspeed_stage_2
+    # strategy: ddp
+    # gradient_clip_val: 1.0
+  
+  strategy:
+    target: pytorch_lightning.strategies.DDPStrategy
+    params:
+      find_unused_parameters: True
+
+  modelcheckpoint:
+    params:
+      every_n_train_steps: 2000  #临时步数保存ckpt
+      filename: "{epoch:03}-{step:07}"
+
+  callbacks:
+    metrics_over_trainsteps_checkpoint:
+      params:
+        every_n_train_steps: 10000  #永久步数保存ckpt
+        filename: "{epoch:03}-{step:07}"
+        save_weights_only: True
+
+    image_logger:
+      target: main.ImageLogger
+      params:
+        disabled: False
+        enable_autocast: True
+        batch_frequency: 250
+        max_images: 8
+        increase_log_steps: True
+        log_first_step: True
