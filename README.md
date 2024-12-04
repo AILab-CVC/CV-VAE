@@ -25,7 +25,7 @@ Generative Video Models</h1>
 ## News
 
 - [x] **2024-10-14** :hugs: We have updated the training code of CV-VAE.
-- [x] **2024-10-14**  We have released the [inference code](cvvae_sd3_inference_video.py) and [model weights](https://huggingface.co/AILab-CVC/CV-VAE/tree/main/vae3d_sd3) of CV-VAE-SD3.
+- [x] **2024-10-14**  We have released the [inference code](cvvae_sd3_inference_video.py) and [model weights](https://huggingface.co/AILab-CVC/CV-VAE/tree/main/vae3d_sd3) of CV-VAE-SD3 which is compatible with [SD3](stabilityai/stable-diffusion-3-medium) and [SD3.5](https://huggingface.co/stabilityai/stable-diffusion-3.5-medium).
 - [x] **2024-10-14**  We have updated the CV-VAE with better performance, please check [cv-vae-v1-1](https://huggingface.co/AILab-CVC/CV-VAE/tree/main/vae3d_v1-1).
 - [x] **2024-09-25**  CV-VAE is accepted by NeurIPS 2024.
 - [x] **2024-06-03**  We have released the [inference code](cvvae_inference_video.py) and [model weights](https://huggingface.co/AILab-CVC/CV-VAE/tree/main/vae3d) of CV-VAE.
